@@ -1,12 +1,14 @@
 package StartPage;
 import javax.swing.*;
-import Dashboard.MainFrame;
 import java.awt.*;
 import java.awt.event.*;
+import Dashboard.MainFrame;
+import Extras.*;
+import Extras.RoundedTextField;
 
 public class SignInpanel extends JPanel implements MouseListener {
     private MainFrame parent;
-    private JButton lgnBtn, rgstrBtn;
+    private RoundedButton lgnBtn, rgstrBtn;
     private ImageIcon backgroundImage = new ImageIcon("./assets/signInPageBg.png");
     private Image scaledBackgroundImage = backgroundImage.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
     private ImageIcon scaledBackground = new ImageIcon(scaledBackgroundImage);
@@ -28,7 +30,7 @@ public class SignInpanel extends JPanel implements MouseListener {
         userLbl.setForeground(fieldForeground);
         add(userLbl);
 
-        JTextField userFld = new JTextField();
+        RoundedTextField userFld = new RoundedTextField(30);
         userFld.setBounds(689, 268, 430, 50);
         userFld.setFont(fieldFont);
         userFld.setBackground(fieldBackground);
@@ -40,56 +42,40 @@ public class SignInpanel extends JPanel implements MouseListener {
         passLbl.setForeground(fieldForeground);
         add(passLbl);
 
-        JPasswordField passFld = new JPasswordField();
+        RoundedPasswordField passFld = new RoundedPasswordField(30);
         passFld.setBounds(689, 378, 430, 50);
         passFld.setFont(fieldFont);
         passFld.setBackground(fieldBackground);
         add(passFld);
 
-        lgnBtn = new JButton("Sign In");
+        lgnBtn = new RoundedButton("Sign In", 30);
         lgnBtn.setBounds(689, 448, 205, 50);
         lgnBtn.setFont(buttonFont);
         lgnBtn.setBackground(fieldBackground);
         lgnBtn.setForeground(fieldForeground);
-        lgnBtn.setFocusPainted(false);
-        lgnBtn.setOpaque(true);
-        lgnBtn.setContentAreaFilled(true);
-        lgnBtn.setBorderPainted(false);
+        lgnBtn.setHoverBackgroundColor(new Color(140, 169, 157));
         lgnBtn.addMouseListener(this);
         add(lgnBtn);
 
-        rgstrBtn = new JButton("Sign Up");
+        rgstrBtn = new RoundedButton("Sign Up", 30);
         rgstrBtn.setBounds(914, 448, 205, 50);
         rgstrBtn.setFont(buttonFont);
         rgstrBtn.setBackground(fieldBackground);
         rgstrBtn.setForeground(fieldForeground);
-        rgstrBtn.setFocusPainted(false);
-        rgstrBtn.setOpaque(true);
-        rgstrBtn.setContentAreaFilled(true);
-        rgstrBtn.setBorderPainted(false);
+        rgstrBtn.setHoverBackgroundColor(new Color(140, 169, 157));
         rgstrBtn.addMouseListener(this);
         add(rgstrBtn);
-
 
         JLabel bgImg = new JLabel(scaledBackground);
         bgImg.setBounds(0, 0, 1280, 720);
         add(bgImg);
 
-
         lgnBtn.addActionListener(e -> parent.initMainUI());
         rgstrBtn.addActionListener(e -> parent.showSignUp());
     }
 
-    public void mouseEntered(MouseEvent e) {
-        JButton b = (JButton) e.getSource();
-        b.setBackground(new Color(140, 169, 157));
-    }
-
-    public void mouseExited(MouseEvent e) {
-        JButton b = (JButton) e.getSource();
-        b.setBackground(new Color(205, 247, 229));
-    }
-
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {}
