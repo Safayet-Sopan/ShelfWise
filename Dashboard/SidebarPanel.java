@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class SidebarPanel extends JPanel implements MouseListener {
 
-    private JButton accountBtn, addBookBtn, updateBookBtn, deleteBookBtn, sellBookBtn, updateStockBtn, salesReportBtn, showBooksBtn, exitBtn;
+    private JButton accountBtn, addBookBtn, updateBookBtn, sellBookBtn, updateStockBtn, salesReportBtn, showBooksBtn, exitBtn;
     private Color normalColor = new Color(26, 46, 53);  // Sidebar dark greenish
     private Color hoverColor = new Color(50, 87, 100); // 'All Books' hover color
 
@@ -109,19 +109,6 @@ public class SidebarPanel extends JPanel implements MouseListener {
         JLabel bgImg = new JLabel(scaledBackground);
         bgImg.setBounds(0, 0, 310, 720);
         add(bgImg);
-    }
-    
-    private JButton createButton(String text, int y) {
-        JButton btn = new JButton(text);
-        btn.setBounds(10, y, 200, 40);
-        btn.setBackground(normalColor);
-        btn.setForeground(Color.WHITE);
-        btn.setFont(new Font("Red Hat Display", Font.BOLD, 18));
-        btn.setFocusPainted(false);
-        btn.setHorizontalAlignment(SwingConstants.LEFT);
-        btn.setBorderPainted(false);
-        btn.addMouseListener(this);
-        return btn;
     }
 
     // Hover effects
