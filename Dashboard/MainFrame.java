@@ -3,8 +3,7 @@ import javax.swing.*;
 import StartPage.SignInpanel;
 import StartPage.SignUpPanel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class MainFrame extends JFrame {
     private CardLayout cardLayout;

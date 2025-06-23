@@ -56,7 +56,7 @@ public class SidebarPanel extends JPanel implements MouseListener {
         addBookBtn.addMouseListener(this);
 
         // Update Books Button
-        updateBookBtn = new JButton("Update Books");
+        updateBookBtn = new JButton("Update Stock");
         updateBookBtn.setBounds(0, 315, 310, 50);
         updateBookBtn.setFont(buttonFont);
         updateBookBtn.setBackground(normalColor);

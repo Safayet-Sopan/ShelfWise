@@ -1,80 +1,94 @@
 package Dashboard;
 
 import javax.swing.*;
+
+import Extras.RoundedButton;
+import Extras.RoundedTextField;
+
 import java.awt.*;
 
 public class UpdateStockPanel extends JPanel {
-    private JTextField isbnField, newStockField;
+    private RoundedTextField isbnField, newStockField;
     private JPanel bookDetailsPanel;
     private JPanel bookInfoPanel; // Changed from JLabel to JPanel
     private InventorySystem inventorySystem;
     private AllBooksPanel allBooksPanel;
 
     public UpdateStockPanel(InventorySystem inventorySystem, AllBooksPanel allBooksPanel) {
+
+        Font titleFont = new Font("Red Hat Display", Font.PLAIN,35);
+        Font labelFont = new Font("Red Hat Display", Font.PLAIN,25);
+        Font fieldFont = new Font("Red Hat Display", Font.PLAIN, 18);
+        Font buttonFont = new Font("Red Hat Display", Font.PLAIN, 18);
+        Color fieldBackground = new Color(205, 247, 229);
+        Color fieldForeground = new Color(26, 46, 53);
+        Color hoverColor = new Color(140, 169, 157);
+
         this.inventorySystem = inventorySystem;
         this.allBooksPanel = allBooksPanel;
         setLayout(null);
         setBackground(Color.WHITE);
 
-        Font labelFont = new Font("Arial", Font.BOLD, 16);
-        Font fieldFont = new Font("Arial", Font.PLAIN, 14);
-
         // Title
         JLabel titleLabel = new JLabel("Update Stock");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setBounds(50, 30, 300, 40);
+        titleLabel.setFont(titleFont);
+        titleLabel.setBounds(64, 37, 232, 46);
         add(titleLabel);
 
         // ISBN input
         JLabel isbnLabel = new JLabel("ISBN");
-        isbnLabel.setBounds(50, 100, 100, 30);
+        isbnLabel.setBounds(64, 103, 272, 30);
         isbnLabel.setFont(labelFont);
         add(isbnLabel);
 
-        isbnField = new JTextField();
-        isbnField.setBounds(50, 140, 400, 40);
+        isbnField = new RoundedTextField(30);
+        isbnField.setBounds(64, 157, 372, 50);
         isbnField.setFont(fieldFont);
+        isbnField.setBackground(fieldBackground);
         add(isbnField);
 
-        JButton findBtn = new JButton("Find Book");
-        findBtn.setBounds(470, 140, 120, 40);
-        findBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        findBtn.setBackground(new Color(70, 130, 180));
-        findBtn.setForeground(Color.lightGray);
+        RoundedButton findBtn = new RoundedButton("Find Book", 30);
+        findBtn.setBounds(470, 157, 205, 50);
+        findBtn.setFont(buttonFont);
+        findBtn.setBackground(fieldBackground);
+        findBtn.setForeground(fieldForeground);
+        findBtn.setHoverBackgroundColor(hoverColor);
         findBtn.addActionListener(e -> findBook());
         add(findBtn);
 
         // Book details area (light green)
         bookDetailsPanel = new JPanel();
         bookDetailsPanel.setLayout(null);
-        bookDetailsPanel.setBackground(new Color(220, 255, 220));
-        bookDetailsPanel.setBounds(50, 200, 800, 200);
+        bookDetailsPanel.setBackground(fieldBackground);
+        bookDetailsPanel.setBounds(64, 236, 852, 283);
         bookDetailsPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         
         // Create a panel to hold book info components instead of using HTML
         bookInfoPanel = new JPanel();
         bookInfoPanel.setLayout(new BoxLayout(bookInfoPanel, BoxLayout.Y_AXIS));
-        bookInfoPanel.setBounds(20, 20, 760, 160);
-        bookInfoPanel.setBackground(new Color(220, 255, 220));
+        bookInfoPanel.setBounds(20, 20, 812, 243);
+        bookInfoPanel.setBackground(fieldBackground);
         bookDetailsPanel.add(bookInfoPanel);
         add(bookDetailsPanel);
 
         // New stock level
-        JLabel stockLabel = new JLabel("New Stock Level");
-        stockLabel.setBounds(50, 430, 200, 30);
+        JLabel stockLabel = new JLabel("New Stock Amount:");
+        stockLabel.setBounds(64, 538, 372, 40);
         stockLabel.setFont(labelFont);
         add(stockLabel);
 
-        newStockField = new JTextField();
-        newStockField.setBounds(50, 470, 400, 40);
+        newStockField = new RoundedTextField(30);
+        newStockField.setBounds(64, 592, 372, 50);
         newStockField.setFont(fieldFont);
+        newStockField.setBackground(fieldBackground);
         add(newStockField);
 
-        JButton updateBtn = new JButton("Update Stock");
-        updateBtn.setBounds(470, 470, 140, 40);
-        updateBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        updateBtn.setBackground(new Color(40, 167, 69));
-        updateBtn.setForeground(Color.lightGray);
+        RoundedButton updateBtn = new RoundedButton("Update Stock",30);
+        updateBtn.setBounds(470, 592, 205, 50);
+        updateBtn.setFont(buttonFont);
+        updateBtn.setBackground(fieldBackground);
+        updateBtn.setForeground(fieldForeground);
+        updateBtn.setHoverBackgroundColor(hoverColor);
         updateBtn.addActionListener(e -> updateStock());
         add(updateBtn);
     }

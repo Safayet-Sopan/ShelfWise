@@ -1,62 +1,75 @@
 package Dashboard;
 
 import javax.swing.*;
+
+import Extras.RoundedButton;
+import Extras.RoundedTextField;
+
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SellBookPanel extends JPanel {
-    private JTextField isbnField, quantityField;
+    private RoundedTextField isbnField, quantityField;
     private JPanel bookDetailsPanel, receiptPanel;
     private JTextArea bookInfoArea, receiptArea;
     private InventorySystem inventorySystem;
     private AllBooksPanel allBooksPanel; // Reference to refresh the table
 
     public SellBookPanel(InventorySystem inventorySystem, AllBooksPanel allBooksPanel) {
+
+        Font titleFont = new Font("Red Hat Display", Font.PLAIN,35);
+        Font labelFont = new Font("Red Hat Display", Font.PLAIN,25);
+        Font fieldFont = new Font("Red Hat Display", Font.PLAIN, 18);
+        Font reciptFont = new Font("Red Hat Display", Font.PLAIN, 12);
+        Font buttonFont = new Font("Red Hat Display", Font.PLAIN, 18);
+        Color fieldBackground = new Color(205, 247, 229);
+        Color fieldForeground = new Color(26, 46, 53);
+        Color hoverColor = new Color(140, 169, 157);
+
         this.inventorySystem = inventorySystem;
         this.allBooksPanel = allBooksPanel;
         setLayout(null);
         setBackground(Color.WHITE);
 
-        Font labelFont = new Font("Arial", Font.BOLD, 16);
-        Font fieldFont = new Font("Arial", Font.PLAIN, 14);
-
         // Title
         JLabel titleLabel = new JLabel("Sell Book");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setBounds(50, 30, 300, 40);
+        titleLabel.setFont(titleFont);
+        titleLabel.setBounds(64, 37, 232, 46);
         add(titleLabel);
 
         // ISBN input
-        JLabel isbnLabel = new JLabel("ISBN");
-        isbnLabel.setBounds(50, 100, 100, 30);
+        JLabel isbnLabel = new JLabel("ISBN:");
+        isbnLabel.setBounds(64, 98, 272, 40);
         isbnLabel.setFont(labelFont);
         add(isbnLabel);
 
-        isbnField = new JTextField();
-        isbnField.setBounds(50, 140, 400, 40);
+        isbnField = new RoundedTextField(30);
+        isbnField.setBounds(64, 152, 372, 50);
+        isbnField.setBackground(fieldBackground);
         isbnField.setFont(fieldFont);
         add(isbnField);
 
-        JButton findBtn = new JButton("Find Book");
-        findBtn.setBounds(470, 140, 120, 40);
-        findBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        findBtn.setBackground(new Color(70, 130, 180));
-        findBtn.setForeground(Color.lightGray);
+        RoundedButton findBtn = new RoundedButton("Find Book", 30);
+        findBtn.setBounds(470, 152, 205, 50);
+        findBtn.setFont(buttonFont);
+        findBtn.setBackground(fieldBackground);
+        findBtn.setForeground(fieldForeground);
+        findBtn.setHoverBackgroundColor(hoverColor);
         findBtn.addActionListener(e -> findBook());
         add(findBtn);
 
         // Book details area
         bookDetailsPanel = new JPanel();
         bookDetailsPanel.setLayout(null);
-        bookDetailsPanel.setBackground(new Color(220, 255, 220));
-        bookDetailsPanel.setBounds(50, 200, 800, 150);
+        bookDetailsPanel.setBackground(fieldBackground);
+        bookDetailsPanel.setBounds(64, 223, 852, 142);
         bookDetailsPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         
         bookInfoArea = new JTextArea();
-        bookInfoArea.setBounds(20, 20, 760, 110);
-        bookInfoArea.setFont(new Font("Arial", Font.PLAIN, 14));
-        bookInfoArea.setBackground(new Color(220, 255, 220));
+        bookInfoArea.setBounds(20, 20, 800, 102);
+        bookInfoArea.setFont(reciptFont);
+        bookInfoArea.setBackground(fieldBackground);
         bookInfoArea.setEditable(false);
         bookInfoArea.setLineWrap(true);
         bookInfoArea.setWrapStyleWord(true);
@@ -64,40 +77,37 @@ public class SellBookPanel extends JPanel {
         add(bookDetailsPanel);
 
         // Quantity
-        JLabel quantityLabel = new JLabel("Quantity");
-        quantityLabel.setBounds(50, 380, 100, 30);
-        quantityLabel.setFont(labelFont);
-        add(quantityLabel);
+        JLabel quantityLbl = new JLabel("Quantity:");
+        quantityLbl.setBounds(64, 375, 372, 40);
+        quantityLbl.setFont(labelFont);
+        add(quantityLbl);
 
-        quantityField = new JTextField();
-        quantityField.setBounds(50, 420, 400, 40);
+        quantityField = new RoundedTextField(30);
+        quantityField.setBounds(64, 429, 372, 50);
+        quantityField.setBackground(fieldBackground);
         quantityField.setFont(fieldFont);
         add(quantityField);
 
-        JButton processSaleBtn = new JButton("Process Sale");
-        processSaleBtn.setBounds(470, 420, 140, 40);
-        processSaleBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        processSaleBtn.setBackground(new Color(40, 167, 69));
-        processSaleBtn.setForeground(Color.lightGray);
+        RoundedButton processSaleBtn = new RoundedButton("Process Sale", 30);
+        processSaleBtn.setBounds(470, 429, 205, 50);
+        processSaleBtn.setFont(buttonFont);
+        processSaleBtn.setBackground(fieldBackground);
+        processSaleBtn.setForeground(fieldForeground);
+        processSaleBtn.setHoverBackgroundColor(hoverColor);
         processSaleBtn.addActionListener(e -> processSale());
         add(processSaleBtn);
 
         // Receipt area
-        JLabel receiptTitle = new JLabel("Receipt");
-        receiptTitle.setBounds(50, 480, 100, 30);
-        receiptTitle.setFont(labelFont);
-        add(receiptTitle);
-
         receiptPanel = new JPanel();
         receiptPanel.setLayout(null);
-        receiptPanel.setBackground(new Color(220, 255, 220));
-        receiptPanel.setBounds(50, 520, 800, 140);
+        receiptPanel.setBackground(fieldBackground);
+        receiptPanel.setBounds(64, 500, 852, 142);
         receiptPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         
         receiptArea = new JTextArea();
-        receiptArea.setBounds(20, 20, 760, 100);
-        receiptArea.setFont(new Font("Arial", Font.PLAIN, 14));
-        receiptArea.setBackground(new Color(220, 255, 220));
+        receiptArea.setBounds(20, 20, 800, 102);
+        receiptArea.setFont(reciptFont);
+        receiptArea.setBackground(fieldBackground);
         receiptArea.setEditable(false);
         receiptArea.setLineWrap(true);
         receiptArea.setWrapStyleWord(true);

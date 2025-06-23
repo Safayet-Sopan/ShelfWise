@@ -11,6 +11,13 @@ public class RoundedTextField extends JTextField {
         setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // padding inside
     }
 
+    public RoundedTextField(String text, int radius) {
+        super(text);
+        this.radius = radius;
+        setOpaque(false);
+        setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+    }
+
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setColor(getBackground());

@@ -1,72 +1,86 @@
 package Dashboard;
 
 import javax.swing.*;
+
+import Extras.RoundedButton;
+import Extras.RoundedTextField;
+
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class SalesReportPanel extends JPanel {
-    private JTextField dateField;
+    private RoundedTextField dateField;
     private JPanel reportPanel;
     private JTextArea reportArea;
     private InventorySystem inventorySystem;
 
     public SalesReportPanel(InventorySystem inventorySystem) {
+        
+        Font titleFont = new Font("Red Hat Display", Font.PLAIN,35);
+        Font labelFont = new Font("Red Hat Display", Font.PLAIN,25);
+        Font fieldFont = new Font("Red Hat Display", Font.PLAIN, 18);
+        Font reciptFont = new Font("Red Hat Display", Font.PLAIN, 12);
+        Font buttonFont = new Font("Red Hat Display", Font.PLAIN, 18);
+        Color fieldBackground = new Color(205, 247, 229);
+        Color fieldForeground = new Color(26, 46, 53);
+        Color hoverColor = new Color(140, 169, 157);
+        
         this.inventorySystem = inventorySystem; // Use the shared inventory system
         setLayout(null);
         setBackground(Color.WHITE);
 
-        Font labelFont = new Font("Arial", Font.BOLD, 16);
-        Font fieldFont = new Font("Arial", Font.PLAIN, 14);
-
         // Title
         JLabel titleLabel = new JLabel("Sales Report");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setBounds(50, 30, 300, 40);
+        titleLabel.setFont(titleFont);
+        titleLabel.setBounds(64, 37, 232, 46);
         add(titleLabel);
 
         // Date input
-        JLabel dateLabel = new JLabel("Select Date (yyyy-MM-dd)");
-        dateLabel.setBounds(50, 100, 200, 30);
+        JLabel dateLabel = new JLabel("Select Date (YYYY-MM-DDD)");
+        dateLabel.setBounds(64, 99, 372, 40);
         dateLabel.setFont(labelFont);
         add(dateLabel);
 
         // Set default date to current date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = sdf.format(new Date());
-        dateField = new JTextField(currentDate);
-        dateField.setBounds(50, 140, 400, 40);
+        dateField = new RoundedTextField(currentDate, 30);
+        dateField.setBounds(64, 153, 372, 50);
+        dateField.setBackground(fieldBackground);
         dateField.setFont(fieldFont);
         add(dateField);
 
-        JButton generateBtn = new JButton("Generate Report");
-        generateBtn.setBounds(470, 140, 150, 40);
-        generateBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        generateBtn.setBackground(new Color(70, 130, 180));
-        generateBtn.setForeground(Color.lightGray);
+        RoundedButton generateBtn = new RoundedButton("Generate Report",30);
+        generateBtn.setBounds(470, 153, 279, 50);
+        generateBtn.setFont(buttonFont);
+        generateBtn.setBackground(fieldBackground);
+        generateBtn.setForeground(fieldForeground);
+        generateBtn.setHoverBackgroundColor(hoverColor);
         generateBtn.addActionListener(e -> generateReport());
         add(generateBtn);
 
         // Clear report button
-        JButton clearBtn = new JButton("Clear");
-        clearBtn.setBounds(640, 140, 100, 40);
-        clearBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        clearBtn.setBackground(new Color(220, 53, 69));
-        clearBtn.setForeground(Color.lightGray);
+        RoundedButton clearBtn = new RoundedButton("Clear", 30);
+        clearBtn.setBounds(779, 153, 135, 50);
+        clearBtn.setFont(buttonFont);
+        clearBtn.setBackground(fieldBackground);
+        clearBtn.setForeground(fieldForeground);
+        clearBtn.setHoverBackgroundColor(hoverColor);
         clearBtn.addActionListener(e -> clearReport());
         add(clearBtn);
 
         // Report area
         reportPanel = new JPanel();
         reportPanel.setLayout(new BorderLayout());
-        reportPanel.setBackground(new Color(220, 255, 220));
-        reportPanel.setBounds(50, 200, 800, 400);
+        reportPanel.setBackground(fieldBackground);
+        reportPanel.setBounds(64, 232, 852, 400);
         reportPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         
         reportArea = new JTextArea();
-        reportArea.setFont(new Font("Courier New", Font.PLAIN, 12));
-        reportArea.setBackground(new Color(220, 255, 220));
+        reportArea.setFont(reciptFont);
+        reportArea.setBackground(fieldBackground);
         reportArea.setEditable(false);
         
         JScrollPane scrollPane = new JScrollPane(reportArea);
@@ -107,7 +121,7 @@ public class SalesReportPanel extends JPanel {
                     title = title.substring(0, 25) + "...";
                 }
                 
-                report.append(String.format("%-30s %-15s %-10d $%-11.2f $%-14.2f\n",
+                report.append(String.format("%-30s %-15s %-10d BDT%-11.2f BDT%-14.2f\n",
                                           title,
                                           sale.getBook().getIsbn(),
                                           sale.getQuantitySold(),
@@ -116,7 +130,7 @@ public class SalesReportPanel extends JPanel {
             }
             
             report.append("\n--------------------------------------------------------------------------------\n");
-            report.append(String.format("TOTAL SALES AMOUNT: $%.2f\n", totalSales));
+            report.append(String.format("TOTAL SALES AMOUNT: BDT%.2f\n", totalSales));
             report.append(String.format("NUMBER OF TRANSACTIONS: %d\n", sales.size()));
             
             // Calculate total books sold

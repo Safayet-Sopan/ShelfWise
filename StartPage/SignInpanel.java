@@ -4,23 +4,20 @@ import java.awt.*;
 import java.awt.event.*;
 import Dashboard.MainFrame;
 import Extras.*;
-import Extras.RoundedTextField;
 
 public class SignInpanel extends JPanel implements MouseListener {
-    private MainFrame parent;
     private RoundedButton lgnBtn, rgstrBtn;
     private ImageIcon backgroundImage = new ImageIcon("./assets/signInPageBg.png");
     private Image scaledBackgroundImage = backgroundImage.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
     private ImageIcon scaledBackground = new ImageIcon(scaledBackgroundImage);
 
     public SignInpanel(MainFrame parent) {
-        this.parent = parent;
         setLayout(null);
         setBackground(Color.WHITE);
 
-        Font labelFont = new Font("Red Hat Display", Font.BOLD,25);
+        Font labelFont = new Font("Red Hat Display", Font.PLAIN,25);
         Font fieldFont = new Font("Red Hat Display", Font.PLAIN, 15);
-        Font buttonFont = new Font("Red Hat Display", Font.BOLD, 15);
+        Font buttonFont = new Font("Red Hat Display", Font.PLAIN, 18);
         Color fieldBackground = new Color(205, 247, 229);
         Color fieldForeground = new Color(26, 46, 53);
 
@@ -70,7 +67,21 @@ public class SignInpanel extends JPanel implements MouseListener {
         bgImg.setBounds(0, 0, 1280, 720);
         add(bgImg);
 
-        lgnBtn.addActionListener(e -> parent.initMainUI());
+        /// Sign In action
+        lgnBtn.addActionListener(e -> {
+            String username = userFld.getText().trim();
+            String password = new String(passFld.getPassword());
+
+            if (username.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in both username and password.");
+            } else if (AccountManager.login(username, password)) {
+                parent.initMainUI();
+            } else {
+                JOptionPane.showMessageDialog(this, "Login failed. Invalid username or password.");
+            }
+        });
+
+        // Sign Up navigation action
         rgstrBtn.addActionListener(e -> parent.showSignUp());
     }
 
