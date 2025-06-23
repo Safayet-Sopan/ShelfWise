@@ -128,7 +128,7 @@ public class SellBookPanel extends JPanel {
                                "ISBN: " + book.getIsbn() + "\n" +
                                "Title: " + book.getTitle() + "\n" +
                                "Author: " + book.getAuthor() + "\n" +
-                               "Price: $" + book.getPrice() + "\n" +
+                               "Price: BDT " + book.getPrice() + "\n" +
                                "Available Stock: " + book.getStockLevel();
             bookInfoArea.setText(bookDetails);
             quantityField.setText("1");
@@ -165,9 +165,9 @@ public class SellBookPanel extends JPanel {
                 String receipt = "SALE RECEIPT\n" +
                                 "Date: " + currentTime + "\n" +
                                 "ISBN: " + book.getIsbn() + "\n" +
-                                "Price per unit: $" + book.getPrice() + "\n" +
+                                "Price per unit: BDT " + book.getPrice() + "\n" +
                                 "Quantity: " + quantity + "\n" +
-                                "Total: $" + String.format("%.2f", saleAmount) + "\n\n" +
+                                "Total: BDT " + String.format("%.2f", saleAmount) + "\n\n" +
                                 "Thank you for your purchase!";
                 receiptArea.setText(receipt);
 
@@ -176,7 +176,7 @@ public class SellBookPanel extends JPanel {
                                    "ISBN: " + book.getIsbn() + "\n" +
                                    "Title: " + book.getTitle() + "\n" +
                                    "Author: " + book.getAuthor() + "\n" +
-                                   "Price: $" + book.getPrice() + "\n" +
+                                   "Price: BDT " + book.getPrice() + "\n" +
                                    "Available Stock: " + book.getStockLevel() + "\n\n" +
                                    "Sale completed successfully!";
                 bookInfoArea.setText(bookDetails);

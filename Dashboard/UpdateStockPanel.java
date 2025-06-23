@@ -128,7 +128,7 @@ public class UpdateStockPanel extends JPanel {
             genreLabel.setFont(new Font("Arial", Font.PLAIN, 14));
             bookInfoPanel.add(genreLabel);
             
-            JLabel priceLabel = new JLabel("Price: $" + book.getPrice());
+            JLabel priceLabel = new JLabel("Price: BDT " + book.getPrice());
             priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
             bookInfoPanel.add(priceLabel);
             
