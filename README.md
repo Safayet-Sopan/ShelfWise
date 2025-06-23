@@ -16,3 +16,5 @@ It features a custom UI, book inventory management, sales reporting, and a secur
 - Dashboard with image backgrounds.
 
 ---
+
+![ShelfWiseCollage](https://github.com/user-attachments/assets/874deb7b-9366-47da-bce1-3e7d33e6b528)
